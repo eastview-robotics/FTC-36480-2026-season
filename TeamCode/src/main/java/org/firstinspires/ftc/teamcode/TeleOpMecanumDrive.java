@@ -27,11 +27,11 @@ public class TeleOpMecanumDrive {
 
         imu = hwMap.get(IMU.class, "imu");
 
-        RevHubOrientationOnRobot RevOrentation = new RevHubOrientationOnRobot(
+        RevHubOrientationOnRobot RevOrientation = new RevHubOrientationOnRobot(
                 RevHubOrientationOnRobot.LogoFacingDirection.UP,
                 RevHubOrientationOnRobot.UsbFacingDirection.FORWARD);
 
-        imu.initialize(new IMU.Parameters(RevOrentation));
+        imu.initialize(new IMU.Parameters(RevOrientation));
     }
 
     public void drive(double forward, double strafe, double rotate) {
