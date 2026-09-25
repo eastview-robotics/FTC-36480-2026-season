@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.Mechanics;
 
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -27,11 +27,11 @@ public class TeleOpMecanumDrive {
 
         imu = hwMap.get(IMU.class, "imu");
 
-        RevHubOrientationOnRobot RevOrentation = new RevHubOrientationOnRobot(
+        RevHubOrientationOnRobot RevOrientation = new RevHubOrientationOnRobot(
                 RevHubOrientationOnRobot.LogoFacingDirection.UP,
-                RevHubOrientationOnRobot.UsbFacingDirection.FORWARD);
+                RevHubOrientationOnRobot.UsbFacingDirection.LEFT);
 
-        imu.initialize(new IMU.Parameters(RevOrentation));
+        imu.initialize(new IMU.Parameters(RevOrientation));
     }
 
     public void drive(double forward, double strafe, double rotate) {
