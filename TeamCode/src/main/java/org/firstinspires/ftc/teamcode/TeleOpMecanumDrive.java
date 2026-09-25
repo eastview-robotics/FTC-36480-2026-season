@@ -27,11 +27,11 @@ public class TeleOpMecanumDrive {
 
         imu = hwMap.get(IMU.class, "imu");
 
-        RevHubOrientationOnRobot RevOrentation = new RevHubOrientationOnRobot(
+        RevHubOrientationOnRobot RevOrientation = new RevHubOrientationOnRobot(
                 RevHubOrientationOnRobot.LogoFacingDirection.UP,
                 RevHubOrientationOnRobot.UsbFacingDirection.FORWARD);
 
-        imu.initialize(new IMU.Parameters(RevOrentation));
+        imu.initialize(new IMU.Parameters(RevOrientation));
     }
 
     public void drive(double forward, double strafe, double rotate) {
@@ -55,14 +55,11 @@ public class TeleOpMecanumDrive {
     }
 
     public void driveFieldRelative(double forward, double strafe, double rotate) {
-        double theta = Math.atan2(forward, strafe);
-        double r = Math.hypot(strafe, forward);
+        // changing the trig for the relative calculations (gm0)
+        double robotHeading = imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS);
 
-        theta = AngleUnit.normalizeRadians(theta -
-                imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS));
-
-        double newForward = r * Math.sin(theta);
-        double newStrafe = r * Math.cos(theta);
+        double newStrafe = strafe * Math.cos(-robotHeading) - forward * Math.sin(-robotHeading);
+        double newForward = strafe * Math.sin(-robotHeading) + forward * Math.cos(-robotHeading);
 
         this.drive(newForward, newStrafe, rotate);
     }
