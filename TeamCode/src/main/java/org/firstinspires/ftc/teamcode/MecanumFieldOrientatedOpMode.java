@@ -3,9 +3,11 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
+import org.firstinspires.ftc.teamcode.mechanisims.MecanumDrive;
+
 @TeleOp(name="Cool Teleop", group = "Concept")
-public class MecanumFieldOrientationOpMode extends OpMode {
-    TeleOpMecanumDrive drive = new TeleOpMecanumDrive();
+public class MecanumFieldOrientatedOpMode extends OpMode {
+    MecanumDrive drive = new MecanumDrive();
     double forward, strafe, rotate;
 
     @Override
