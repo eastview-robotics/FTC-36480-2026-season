@@ -12,6 +12,7 @@ public class MecanumDrive {
     private DcMotor frontLeftMotor, backLeftMotor, frontRightMotor, backRightMotor;
     private IMU imu;
     public void init(HardwareMap hwMap) {
+        //TODO fix the drive hub config typo
         frontLeftMotor = hwMap.get(DcMotor.class, "front_left_motor");
         backLeftMotor = hwMap.get(DcMotor.class, "back_left_motor");
         frontRightMotor = hwMap.get(DcMotor.class, "front_Right_motor");
