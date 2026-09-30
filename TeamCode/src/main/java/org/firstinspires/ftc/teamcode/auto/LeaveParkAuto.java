@@ -8,15 +8,17 @@ import com.pedropathing.utils.Timer;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
+import org.firstinspires.ftc.teamcode.mechanisims.Intake;
 import org.firstinspires.ftc.teamcode.pedro.Constants;
 
 @Autonomous(name="Leave Park Auto", group = "Concept")
 public class LeaveParkAuto extends OpMode {
     private Follower follower;
+    Intake intake = new Intake();
     private Timer pathTimer, opModeTimer;
 
     public enum PathState {
-        DRIVE_STARTPOS_LEAVE_POS,
+        DRIVE_START_POS_LEAVE_POS,
         DRIVE_SPIN,
         DRIVE_PARK_POS,
         DONE
@@ -42,8 +44,9 @@ public class LeaveParkAuto extends OpMode {
 
     public void statePathUpdate() {
         switch (pathState) {
-            case DRIVE_STARTPOS_LEAVE_POS:
+            case DRIVE_START_POS_LEAVE_POS:
                 follower.follow(driveStartPosLeavePos);
+                intake.setIntakeDirection(1);
                 setPathState(PathState.DRIVE_SPIN);
                 break;
 
@@ -51,6 +54,7 @@ public class LeaveParkAuto extends OpMode {
                 if (!follower.isBusy()) {
                     telemetry.addLine("wow yay (Path 1 Done)");
                     follower.follow(driveSpinPos);
+                    intake.setIntakeDirection(-1);
                     setPathState(PathState.DRIVE_PARK_POS);
                 }
                 break;
@@ -59,12 +63,14 @@ public class LeaveParkAuto extends OpMode {
                 if (!follower.isBusy()) {
                     telemetry.addLine("ohhh shoot we are spinning too (Path 2 done)");
                     follower.follow(driveParkPos);
+                    intake.setIntakeDirection(1);
                     setPathState(PathState.DONE);
                 }
                 break;
 
             case DONE:
                 if (!follower.isBusy()) {
+                    intake.setIntakeDirection(0);
                     telemetry.addLine("Auto Complete!");
                 }
                 break;
@@ -82,7 +88,7 @@ public class LeaveParkAuto extends OpMode {
     }
     @Override
     public void init() {
-        pathState = PathState.DRIVE_STARTPOS_LEAVE_POS;
+        pathState = PathState.DRIVE_START_POS_LEAVE_POS;
         pathTimer = new Timer();
         opModeTimer = new Timer();
         opModeTimer.reset();
