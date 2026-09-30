@@ -15,7 +15,7 @@ public class MecanumDrive {
         //TODO fix the drive hub config typo
         frontLeftMotor = hwMap.get(DcMotor.class, "front_left_motor");
         backLeftMotor = hwMap.get(DcMotor.class, "back_left_motor");
-        frontRightMotor = hwMap.get(DcMotor.class, "front_Right_motor");
+        frontRightMotor = hwMap.get(DcMotor.class, "front_right_motor");
         backRightMotor = hwMap.get(DcMotor.class, "back_right_motor");
 
         frontLeftMotor.setDirection(DcMotor.Direction.REVERSE);
