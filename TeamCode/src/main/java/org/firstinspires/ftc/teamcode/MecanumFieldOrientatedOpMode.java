@@ -17,7 +17,7 @@ public class MecanumFieldOrientatedOpMode extends OpMode {
 
     @Override
     public void loop() {
-        // the y stick is inverted on the gamepad...i think
+        // the y stick is inverted on the gamepad...i think?
         forward = -gamepad1.left_stick_y;
         strafe = gamepad1.left_stick_x;
         rotate = gamepad1.right_stick_x;
