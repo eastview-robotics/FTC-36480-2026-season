@@ -12,7 +12,6 @@ public class MecanumDrive {
     private DcMotor frontLeftMotor, backLeftMotor, frontRightMotor, backRightMotor;
     private IMU imu;
     public void init(HardwareMap hwMap) {
-        //TODO fix the drive hub config typo
         frontLeftMotor = hwMap.get(DcMotor.class, "front_left_motor");
         backLeftMotor = hwMap.get(DcMotor.class, "back_left_motor");
         frontRightMotor = hwMap.get(DcMotor.class, "front_right_motor");
@@ -53,6 +52,9 @@ public class MecanumDrive {
         backLeftMotor.setPower(maxSpeed * (backLeftPower / maxPower));
         frontRightMotor.setPower(maxSpeed * (frontRightPower / maxPower));
         backRightMotor.setPower(maxSpeed * (backRightPower / maxPower));
+    }
+    public void resetYaw() {
+        imu.resetYaw();
     }
 
     public void driveFieldRelative(double forward, double strafe, double rotate) {

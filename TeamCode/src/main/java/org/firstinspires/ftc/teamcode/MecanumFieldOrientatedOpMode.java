@@ -2,13 +2,13 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-
 import org.firstinspires.ftc.teamcode.mechanisims.MecanumDrive;
 
 @TeleOp(name="Cool Teleop", group = "Concept")
 public class MecanumFieldOrientatedOpMode extends OpMode {
     MecanumDrive drive = new MecanumDrive();
-    double forward, strafe, rotate;
+
+    private static final double DEADZONE = 0.05;
 
     @Override
     public void init() {
@@ -16,13 +16,20 @@ public class MecanumFieldOrientatedOpMode extends OpMode {
     }
 
     @Override
-    public void loop() {
-        // the y stick is inverted on the gamepad...i think?
-        forward = -gamepad1.left_stick_y;
-        strafe = gamepad1.left_stick_x;
-        rotate = gamepad1.right_stick_x;
-
-        drive.driveFieldRelative(forward,strafe,rotate);
+    public void start() {
+        drive.resetYaw(); // Reset heading when driver presses Play
     }
 
+    @Override
+    public void loop() {
+        double forward = applyDeadzone(-gamepad1.left_stick_y);
+        double strafe  = applyDeadzone(gamepad1.left_stick_x);
+        double rotate  = applyDeadzone(gamepad1.right_stick_x);
+
+        drive.driveFieldRelative(forward, strafe, rotate);
+    }
+
+    private double applyDeadzone(double value) {
+        return Math.abs(value) > DEADZONE ? value : 0.0;
+    }
 }
