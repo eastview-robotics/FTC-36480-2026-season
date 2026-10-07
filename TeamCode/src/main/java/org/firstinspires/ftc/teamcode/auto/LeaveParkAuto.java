@@ -33,8 +33,8 @@ public class LeaveParkAuto extends OpMode {
     private Path driveParkPos;
 
     public void buildPaths() {
-        driveStartPosLeavePos = Paths.line(startPose, leavePose);
-        driveParkPos          = Paths.line(leavePose, parkPose);
+        driveStartPosLeavePos = Paths.line(startPose, leavePose).constant(startPose.heading());
+        driveParkPos          = Paths.line(leavePose, parkPose).linear(leavePose.heading(), parkPose.heading());
     }
 
     public void statePathUpdate() {
