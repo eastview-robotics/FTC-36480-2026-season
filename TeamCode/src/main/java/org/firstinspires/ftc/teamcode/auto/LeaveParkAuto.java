@@ -26,7 +26,7 @@ public class LeaveParkAuto extends OpMode {
     private PathState pathState;
 
     private final Pose startPose = new Pose(56, 8, Math.toRadians(90));
-    private final Pose leavePose = new Pose(52.8, 37.7, Math.toRadians(90));
+    private final Pose leavePose = new Pose(56, 10, Math.toRadians(90));
     // For pure rotations, hold position at leavePose while updating heading target,
     // or include the turn directly into the park path.
     private final Pose parkPose  = new Pose(56, 8, Math.toRadians(-90));
@@ -42,16 +42,16 @@ public class LeaveParkAuto extends OpMode {
     public void statePathUpdate() {
         switch (pathState) {
             case DRIVE_START_POS_LEAVE_POS:
+                intake.setIntakeDirection(1);
                 follower.follow(driveStartPosLeavePos);
                 setPathState(PathState.WAIT_LEAVE_POS);
-                intake.setIntakeDirection(1);
                 break;
 
             case WAIT_LEAVE_POS:
                 if (!follower.isBusy()) {
                     telemetry.addLine("Path 1 Done -> Moving to Park");
-                    follower.follow(driveParkPos);
                     intake.setIntakeDirection(-1);
+                    follower.follow(driveParkPos);
                     setPathState(PathState.WAIT_PARK_POS);
                 }
                 break;

@@ -15,17 +15,13 @@ public class MecanumFieldOrientatedOpMode extends OpMode {
     private boolean isReversed = false;
     private boolean lastGamepad1B = false;
     private boolean lastGamepad1A = false;
-    private static final double DEADZONE = 0.08;
+    private static final double DEADZONE = 0.04;
 
     @Override
     public void init() {
         drive.init(hardwareMap);
-        initIntake();
-    }
-
-    @Override
-    public void start() {
         drive.resetYaw(); // Reset heading when driver presses Play
+        initIntake();
     }
 
     @Override
@@ -68,6 +64,8 @@ public class MecanumFieldOrientatedOpMode extends OpMode {
             intake.setIntakeDirection(0.0);
         }
         telemetry.addData("Motor Revs", intake.getIntakeRevs());
+        telemetry.addData("Intake On", intakeOn);
+        telemetry.addData("Intake Reversed", isReversed);
     }
     private double applyDeadzone(double value) {
         return Math.abs(value) > DEADZONE ? value : 0.0;
