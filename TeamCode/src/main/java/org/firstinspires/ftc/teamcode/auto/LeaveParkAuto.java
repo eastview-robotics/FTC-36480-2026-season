@@ -88,6 +88,8 @@ public class LeaveParkAuto extends OpMode {
         follower = Constants.create(hardwareMap);
         follower.setPose(startPose);
 
+        intake.init(hardwareMap);
+
         buildPaths();
     }
 

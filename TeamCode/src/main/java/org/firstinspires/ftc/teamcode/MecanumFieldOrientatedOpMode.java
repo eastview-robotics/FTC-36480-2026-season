@@ -15,7 +15,7 @@ public class MecanumFieldOrientatedOpMode extends OpMode {
     private boolean isReversed = false;
     private boolean lastGamepad1B = false;
     private boolean lastGamepad1A = false;
-    private static final double DEADZONE = 0.05;
+    private static final double DEADZONE = 0.08;
 
     @Override
     public void init() {
@@ -36,6 +36,11 @@ public class MecanumFieldOrientatedOpMode extends OpMode {
 
         drive.driveFieldRelative(forward, strafe, rotate);
         loopIntake();
+
+        telemetry.addData("Raw Right Stick X", gamepad1.right_stick_x);
+        telemetry.addData("Deadzoned Rotate", rotate);
+        telemetry.addData("Deadzoned Forward", forward);
+        telemetry.addData("Deadzoned Strafe", strafe);
     }
 
     private void initIntake() {
