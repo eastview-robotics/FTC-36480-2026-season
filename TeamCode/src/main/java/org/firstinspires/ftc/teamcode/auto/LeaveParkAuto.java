@@ -8,11 +8,13 @@ import com.pedropathing.utils.Timer;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
+import org.firstinspires.ftc.teamcode.mechanisims.Intake;
 import org.firstinspires.ftc.teamcode.pedro.Constants;
 
 @Autonomous(name="Leave Park Auto", group = "Concept")
 public class LeaveParkAuto extends OpMode {
     private Follower follower;
+    Intake intake = new Intake();
     private Timer pathTimer, opModeTimer;
 
     public enum PathState {
@@ -42,12 +44,14 @@ public class LeaveParkAuto extends OpMode {
             case DRIVE_START_POS_LEAVE_POS:
                 follower.follow(driveStartPosLeavePos);
                 setPathState(PathState.WAIT_LEAVE_POS);
+                intake.setIntakeDirection(1);
                 break;
 
             case WAIT_LEAVE_POS:
                 if (!follower.isBusy()) {
                     telemetry.addLine("Path 1 Done -> Moving to Park");
                     follower.follow(driveParkPos);
+                    intake.setIntakeDirection(-1);
                     setPathState(PathState.WAIT_PARK_POS);
                 }
                 break;
@@ -55,6 +59,7 @@ public class LeaveParkAuto extends OpMode {
             case WAIT_PARK_POS:
                 if (!follower.isBusy()) {
                     telemetry.addLine("Park Path Done");
+                    intake.setIntakeDirection(0);
                     setPathState(PathState.DONE);
                 }
                 break;
