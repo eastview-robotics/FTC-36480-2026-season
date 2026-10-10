@@ -26,7 +26,7 @@ public class LeaveParkAuto extends OpMode {
     private PathState pathState;
 
     private final Pose startPose = new Pose(56, 8, Math.toRadians(90));
-    private final Pose leavePose = new Pose(56, 10, Math.toRadians(90));
+    private final Pose leavePose = new Pose(56, 40, Math.toRadians(90));
     // For pure rotations, hold position at leavePose while updating heading target,
     // or include the turn directly into the park path.
     private final Pose parkPose  = new Pose(56, 8, Math.toRadians(-90));

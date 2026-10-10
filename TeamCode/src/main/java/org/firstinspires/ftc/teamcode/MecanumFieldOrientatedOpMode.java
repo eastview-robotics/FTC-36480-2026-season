@@ -20,8 +20,12 @@ public class MecanumFieldOrientatedOpMode extends OpMode {
     @Override
     public void init() {
         drive.init(hardwareMap);
-        drive.resetYaw(); // Reset heading when driver presses Play
         initIntake();
+    }
+
+    @Override
+    public void start() {
+        drive.resetYaw(); // Reset heading when driver presses Play
     }
 
     @Override
