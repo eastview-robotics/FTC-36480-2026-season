@@ -10,6 +10,7 @@ import org.firstinspires.ftc.teamcode.mechanisims.MecanumDrive;
 public class MecanumFieldOrientatedOpMode extends OpMode {
     MecanumDrive drive = new MecanumDrive();
     // intake
+    private boolean lastGamepad1X = false;
     Intake intake = new Intake();
     private boolean intakeOn = false;
     private boolean isReversed = false;
@@ -36,6 +37,11 @@ public class MecanumFieldOrientatedOpMode extends OpMode {
 
         drive.driveFieldRelative(forward, strafe, rotate);
         loopIntake();
+
+        if (gamepad1.x && !lastGamepad1X) {
+            drive.resetYaw();
+        }
+        lastGamepad1X = gamepad1.x;
 
         telemetry.addData("Raw Right Stick X", gamepad1.right_stick_x);
         telemetry.addData("Deadzoned Rotate", rotate);
