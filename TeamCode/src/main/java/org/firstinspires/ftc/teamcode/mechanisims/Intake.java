@@ -14,13 +14,13 @@ public class Intake {
         intakeMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         ticksPerRev = intakeMotor.getMotorType().getTicksPerRev();
         if (ticksPerRev == 0) {
-            ticksPerRev = 1.0;
+            ticksPerRev = 28;
         }
     }
     //change the direction of the intake
     //1 = normal direction, -1 = reverse, 0 = stop
     public void setIntakeDirection(double multi) {
-        double speed = 1.0;
+        double speed = 10;
         intakeMotor.setPower(speed*multi);
     }
     // if this number is counting down instead of up then somebody don't know how 2 wire 😂
