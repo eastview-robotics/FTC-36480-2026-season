@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
+import org.firstinspires.ftc.teamcode.mechanisims.Indexer;
 import org.firstinspires.ftc.teamcode.mechanisims.Intake;
 import org.firstinspires.ftc.teamcode.mechanisims.MecanumDrive;
 import org.firstinspires.ftc.teamcode.mechanisims.Outtake;
@@ -21,6 +22,11 @@ public class MecanumFieldOrientatedOpMode extends OpMode {
     Outtake outtake = new Outtake();
     private boolean outtakeOn = true;
     private boolean lastGamepad2B = false;
+
+    Indexer indexer = new Indexer();
+
+    private boolean lastGamepad2L_Bumper = false;
+    private boolean indexerUp = false;
     private static final double DEADZONE = 0.04;
 
 
@@ -30,6 +36,7 @@ public class MecanumFieldOrientatedOpMode extends OpMode {
         drive.init(hardwareMap);
         initIntake();
         initOuttake();
+        initIndexer();
     }
 
     @Override
@@ -45,6 +52,8 @@ public class MecanumFieldOrientatedOpMode extends OpMode {
 
         drive.driveFieldRelative(forward, strafe, rotate);
         loopIntake();
+        loopOuttake();
+        loopIndexer();
 
         if (gamepad1.x && !lastGamepad1X) {
             drive.resetYaw();
@@ -63,6 +72,9 @@ public class MecanumFieldOrientatedOpMode extends OpMode {
 
     private void initOuttake() {
         outtake.init(hardwareMap);
+    }
+    private void initIndexer() {
+        indexer.init(hardwareMap);
     }
 
     private void loopIntake() {
@@ -107,6 +119,19 @@ public class MecanumFieldOrientatedOpMode extends OpMode {
         telemetry.addData("Motor Revs", outtake.getOuttakeRevs());
         telemetry.addData("Outtake On", outtake);
         telemetry.addData("Outtake Reversed", isReversed);
+    }
+
+    private void loopIndexer() {
+        if (gamepad2.left_bumper && !lastGamepad2L_Bumper) {
+            indexerUp = !indexerUp;
+        }
+        lastGamepad2L_Bumper = gamepad2.left_bumper;
+
+        if (indexerUp) {
+            indexer.setServoPos(0.0);
+        } else {
+            indexer.setServoPos(1.0);
+        }
     }
     private double applyDeadzone(double value) {
         return Math.abs(value) > DEADZONE ? value : 0.0;
