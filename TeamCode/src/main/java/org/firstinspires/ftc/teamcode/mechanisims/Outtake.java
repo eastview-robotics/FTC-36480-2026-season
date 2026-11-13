@@ -20,7 +20,7 @@ public class Outtake {
     //change the direction of the intake
     //1 = normal direction, -1 = reverse, 0 = stop
     public void setOuttakeDirection(double multi) {
-        double speed = 5;
+        double speed = 5.0;
         OuttakeMotor.setPower(speed*multi);
     }
     // if this number is counting down instead of up then somebody don't know how 2 wire 😂

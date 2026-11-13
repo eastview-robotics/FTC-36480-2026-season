@@ -128,10 +128,16 @@ public class MecanumFieldOrientatedOpMode extends OpMode {
         lastGamepad2L_Bumper = gamepad2.left_bumper;
 
         if (indexerUp) {
-            indexer.setServoPos(0.0);
+            indexer.setServoPos(0.32);
+            //up?
         } else {
-            indexer.setServoPos(1.0);
+            indexer.setServoPos(0.0);
+            //down?
         }
+        telemetry.addData("server pos is", indexer.getPosition());
+        telemetry.addData("indexer Up", indexerUp);
+        telemetry.addData("Gamepad2 left bumper", gamepad2.left_bumper);
+        telemetry.addData("Last Gamepad left bumper", lastGamepad2L_Bumper);
     }
     private double applyDeadzone(double value) {
         return Math.abs(value) > DEADZONE ? value : 0.0;

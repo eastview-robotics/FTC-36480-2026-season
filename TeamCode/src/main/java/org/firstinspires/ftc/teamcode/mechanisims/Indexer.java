@@ -13,4 +13,9 @@ public class Indexer {
     public void setServoPos(double angle) {
         servoPos.setPosition(angle);
     }
+    public double getPosition(){
+        return servoPos.getPosition();
+    }
+
+
 }
