@@ -22,7 +22,6 @@ public class LeaveParkAutoHive extends OpMode {
     Outtake outtake = new Outtake();
 
     Indexer indexer = new Indexer();
-    private ElapsedTime myTimer = new ElapsedTime();
 
     private Timer pathTimer, opModeTimer;
 
@@ -54,11 +53,11 @@ public class LeaveParkAutoHive extends OpMode {
             case SHOOT_START_POS:
                 outtake.setOuttakeDirection(1);
                 indexer.setServoPos(0.32);
-                if (myTimer.milliseconds() > 5000) {
-                    // do something after 3 seconds
+                if (pathTimer.milliseconds() > 5000) {
+                    // do something after 5 seconds
                     setPathState(PathState.DRIVE_START_POS_LEAVE_POS);
                 }
-                myTimer = new ElapsedTime();
+
                 break;
 
             case DRIVE_START_POS_LEAVE_POS:
@@ -100,7 +99,7 @@ public class LeaveParkAutoHive extends OpMode {
 
     @Override
     public void init() {
-        pathState = PathState.DRIVE_START_POS_LEAVE_POS;
+        pathState = PathState.SHOOT_START_POS;
         pathTimer = new Timer();
         opModeTimer = new Timer();
 
@@ -108,6 +107,8 @@ public class LeaveParkAutoHive extends OpMode {
         follower.setPose(startPose);
 
         intake.init(hardwareMap);
+        outtake.init(hardwareMap);
+        indexer.init(hardwareMap);
 
         buildPaths();
     }
@@ -115,7 +116,7 @@ public class LeaveParkAutoHive extends OpMode {
     @Override
     public void start() {
         opModeTimer.reset();
-        setPathState(PathState.DRIVE_START_POS_LEAVE_POS);
+        setPathState(PathState.SHOOT_START_POS);
     }
 
     @Override
@@ -128,5 +129,6 @@ public class LeaveParkAutoHive extends OpMode {
         telemetry.addData("Heading", Math.toDegrees(follower.pose().heading()));
         telemetry.addData("X", follower.pose().x());
         telemetry.addData("Y", follower.pose().y());
+        telemetry.addData("Servo Position", indexer.getPosition());
     }
 }

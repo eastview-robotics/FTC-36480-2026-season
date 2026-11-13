@@ -16,16 +16,16 @@ public class MecanumFieldOrientatedOpMode extends OpMode {
     Intake intake = new Intake();
     private boolean intakeOn = true;
     private boolean isReversed = true;
-    private boolean lastGamepad1B = false;
+    private boolean lastGamepad1B = true;
     private boolean lastGamepad1A = false;
 
     Outtake outtake = new Outtake();
     private boolean outtakeOn = true;
-    private boolean lastGamepad2B = false;
+    private boolean lastGamepad2B = true;
 
     Indexer indexer = new Indexer();
 
-    private boolean lastGamepad2L_Bumper = false;
+    private boolean lastGamepad2L_Bumper = true;
     private boolean indexerUp = false;
     private static final double DEADZONE = 0.04;
 
