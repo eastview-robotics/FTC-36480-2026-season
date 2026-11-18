@@ -52,7 +52,7 @@ public class LeaveParkAutoHive extends OpMode {
         switch (pathState) {
             case SHOOT_START_POS:
                 outtake.setOuttakeDirection(1);
-                indexer.setServoPos(0.32);
+                indexer.setServoPos(0.7);
                 if (pathTimer.milliseconds() > 5000) {
                     // do something after 5 seconds
                     setPathState(PathState.DRIVE_START_POS_LEAVE_POS);
@@ -62,7 +62,7 @@ public class LeaveParkAutoHive extends OpMode {
 
             case DRIVE_START_POS_LEAVE_POS:
                 outtake.setOuttakeDirection(0.0);
-                indexer.setServoPos(0.0);
+                indexer.setServoPos(0.35);
                 follower.follow(driveStartPosLeavePos);
                 setPathState(PathState.WAIT_LEAVE_POS);
                 break;

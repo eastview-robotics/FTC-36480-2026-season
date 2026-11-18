@@ -14,13 +14,13 @@ public class MecanumFieldOrientatedOpMode extends OpMode {
     // intake
     private boolean lastGamepad1X = false;
     Intake intake = new Intake();
-    private boolean intakeOn = true;
+    private boolean intakeOn = false;
     private boolean isReversed = true;
     private boolean lastGamepad1B = false;
     private boolean lastGamepad1A = false;
 
     Outtake outtake = new Outtake();
-    private boolean outtakeOn = true;
+    private boolean outtakeOn = false;
     private boolean lastGamepad2B = false;
 
     Indexer indexer = new Indexer();
@@ -118,7 +118,6 @@ public class MecanumFieldOrientatedOpMode extends OpMode {
         }
         telemetry.addData("Motor Revs", outtake.getOuttakeRevs());
         telemetry.addData("Outtake On", outtake);
-        telemetry.addData("Outtake Reversed", isReversed);
     }
 
     private void loopIndexer() {
@@ -128,10 +127,10 @@ public class MecanumFieldOrientatedOpMode extends OpMode {
         lastGamepad2L_Bumper = gamepad2.left_bumper;
 
         if (indexerUp) {
-            indexer.setServoPos(0.32);
+            indexer.setServoPos(0.7);
             //up?
         } else {
-            indexer.setServoPos(0.0);
+            indexer.setServoPos(0.35);
             //down?
         }
         telemetry.addData("server pos is", indexer.getPosition());

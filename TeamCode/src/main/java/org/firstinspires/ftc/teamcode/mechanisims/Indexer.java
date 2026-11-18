@@ -8,6 +8,7 @@ public class Indexer {
 
     public void init(HardwareMap hwMap) {
         servoPos = hwMap.get(Servo.class, "servo_pos");
+        servoPos.setPosition(0.35);
     }
 
     public void setServoPos(double angle) {
